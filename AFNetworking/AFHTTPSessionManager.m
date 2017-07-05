@@ -119,7 +119,7 @@
 
 - (NSURLSessionDataTask *)GET:(NSString *)URLString
                    parameters:(id)parameters
-                      success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                      success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSData *data))success
                       failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
 
@@ -129,7 +129,7 @@
 - (NSURLSessionDataTask *)GET:(NSString *)URLString
                    parameters:(id)parameters
                      progress:(void (^)(NSProgress * _Nonnull))downloadProgress
-                      success:(void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable))success
+                      success:(void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable,NSData * _Nullable data))success
                       failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure
 {
 
@@ -151,7 +151,7 @@
                        success:(void (^)(NSURLSessionDataTask *task))success
                        failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
-    NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:@"HEAD" URLString:URLString parameters:parameters uploadProgress:nil downloadProgress:nil success:^(NSURLSessionDataTask *task, __unused id responseObject) {
+    NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:@"HEAD" URLString:URLString parameters:parameters uploadProgress:nil downloadProgress:nil success:^(NSURLSessionDataTask *task, __unused id responseObject, NSData *data) {
         if (success) {
             success(task);
         }
@@ -164,7 +164,7 @@
 
 - (NSURLSessionDataTask *)POST:(NSString *)URLString
                     parameters:(id)parameters
-                       success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                       success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSData *data))success
                        failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
     return [self POST:URLString parameters:parameters progress:nil success:success failure:failure];
@@ -173,7 +173,7 @@
 - (NSURLSessionDataTask *)POST:(NSString *)URLString
                     parameters:(id)parameters
                       progress:(void (^)(NSProgress * _Nonnull))uploadProgress
-                       success:(void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable))success
+                       success:(void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable,NSData *))success
                        failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure
 {
     NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:@"POST" URLString:URLString parameters:parameters uploadProgress:uploadProgress downloadProgress:nil success:success failure:failure];
@@ -186,7 +186,7 @@
 - (NSURLSessionDataTask *)POST:(NSString *)URLString
                     parameters:(nullable id)parameters
      constructingBodyWithBlock:(nullable void (^)(id<AFMultipartFormData> _Nonnull))block
-                       success:(nullable void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable))success
+                       success:(nullable void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable,NSData *))success
                        failure:(nullable void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure
 {
     return [self POST:URLString parameters:parameters constructingBodyWithBlock:block progress:nil success:success failure:failure];
@@ -196,7 +196,7 @@
                     parameters:(id)parameters
      constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
                       progress:(nullable void (^)(NSProgress * _Nonnull))uploadProgress
-                       success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                       success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSData *data))success
                        failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
     NSError *serializationError = nil;
@@ -211,14 +211,14 @@
         return nil;
     }
 
-    __block NSURLSessionDataTask *task = [self uploadTaskWithStreamedRequest:request progress:uploadProgress completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
+    __block NSURLSessionDataTask *task = [self uploadTaskWithStreamedRequest:request progress:uploadProgress completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error, NSData *data) {
         if (error) {
             if (failure) {
                 failure(task, error);
             }
         } else {
             if (success) {
-                success(task, responseObject);
+                success(task, responseObject, data);
             }
         }
     }];
@@ -230,7 +230,7 @@
 
 - (NSURLSessionDataTask *)PUT:(NSString *)URLString
                    parameters:(id)parameters
-                      success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                      success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSData *data))success
                       failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
     NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:@"PUT" URLString:URLString parameters:parameters uploadProgress:nil downloadProgress:nil success:success failure:failure];
@@ -242,7 +242,7 @@
 
 - (NSURLSessionDataTask *)PATCH:(NSString *)URLString
                      parameters:(id)parameters
-                        success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                        success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSData *data))success
                         failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
     NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:@"PATCH" URLString:URLString parameters:parameters uploadProgress:nil downloadProgress:nil success:success failure:failure];
@@ -254,7 +254,7 @@
 
 - (NSURLSessionDataTask *)DELETE:(NSString *)URLString
                       parameters:(id)parameters
-                         success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                         success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSData *data))success
                          failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
     NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:@"DELETE" URLString:URLString parameters:parameters uploadProgress:nil downloadProgress:nil success:success failure:failure];
@@ -269,7 +269,7 @@
                                       parameters:(id)parameters
                                   uploadProgress:(nullable void (^)(NSProgress *uploadProgress)) uploadProgress
                                 downloadProgress:(nullable void (^)(NSProgress *downloadProgress)) downloadProgress
-                                         success:(void (^)(NSURLSessionDataTask *, id))success
+                                         success:(void (^)(NSURLSessionDataTask *, id, NSData *))success
                                          failure:(void (^)(NSURLSessionDataTask *, NSError *))failure
 {
     NSError *serializationError = nil;
@@ -288,14 +288,14 @@
     dataTask = [self dataTaskWithRequest:request
                           uploadProgress:uploadProgress
                         downloadProgress:downloadProgress
-                       completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
+                       completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error, NSData *data) {
         if (error) {
             if (failure) {
                 failure(dataTask, error);
             }
         } else {
             if (success) {
-                success(dataTask, responseObject);
+                success(dataTask, responseObject, data);
             }
         }
     }];
