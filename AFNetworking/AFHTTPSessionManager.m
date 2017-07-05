@@ -106,7 +106,7 @@
 
 - (NSURLSessionDataTask *)GET:(NSString *)URLString
                    parameters:(id)parameters
-                      success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                      success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSData *data))success
                       failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
     NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:@"GET" URLString:URLString parameters:parameters success:success failure:failure];
@@ -121,7 +121,7 @@
                        success:(void (^)(NSURLSessionDataTask *task))success
                        failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
-    NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:@"HEAD" URLString:URLString parameters:parameters success:^(NSURLSessionDataTask *task, __unused id responseObject) {
+    NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:@"HEAD" URLString:URLString parameters:parameters success:^(NSURLSessionDataTask *task, __unused id responseObject, NSData *data) {
         if (success) {
             success(task);
         }
@@ -134,7 +134,7 @@
 
 - (NSURLSessionDataTask *)POST:(NSString *)URLString
                     parameters:(id)parameters
-                       success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                       success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSData *data))success
                        failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
     NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:@"POST" URLString:URLString parameters:parameters success:success failure:failure];
@@ -147,7 +147,7 @@
 - (NSURLSessionDataTask *)POST:(NSString *)URLString
                     parameters:(id)parameters
      constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
-                       success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                       success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSData *data))success
                        failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
     NSError *serializationError = nil;
@@ -165,14 +165,14 @@
         return nil;
     }
 
-    __block NSURLSessionDataTask *task = [self uploadTaskWithStreamedRequest:request progress:nil completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
+    __block NSURLSessionDataTask *task = [self uploadTaskWithStreamedRequest:request progress:nil completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error, NSData *data) {
         if (error) {
             if (failure) {
                 failure(task, error);
             }
         } else {
             if (success) {
-                success(task, responseObject);
+                success(task, responseObject, data);
             }
         }
     }];
@@ -184,7 +184,7 @@
 
 - (NSURLSessionDataTask *)PUT:(NSString *)URLString
                    parameters:(id)parameters
-                      success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                      success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSData *data))success
                       failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
     NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:@"PUT" URLString:URLString parameters:parameters success:success failure:failure];
@@ -196,7 +196,7 @@
 
 - (NSURLSessionDataTask *)PATCH:(NSString *)URLString
                      parameters:(id)parameters
-                        success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                        success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSData *data))success
                         failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
     NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:@"PATCH" URLString:URLString parameters:parameters success:success failure:failure];
@@ -208,7 +208,7 @@
 
 - (NSURLSessionDataTask *)DELETE:(NSString *)URLString
                       parameters:(id)parameters
-                         success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                         success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSData *data))success
                          failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
     NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:@"DELETE" URLString:URLString parameters:parameters success:success failure:failure];
@@ -221,7 +221,7 @@
 - (NSURLSessionDataTask *)dataTaskWithHTTPMethod:(NSString *)method
                                        URLString:(NSString *)URLString
                                       parameters:(id)parameters
-                                         success:(void (^)(NSURLSessionDataTask *, id))success
+                                         success:(void (^)(NSURLSessionDataTask *, id, NSData *))success
                                          failure:(void (^)(NSURLSessionDataTask *, NSError *))failure
 {
     NSError *serializationError = nil;
@@ -240,14 +240,14 @@
     }
 
     __block NSURLSessionDataTask *dataTask = nil;
-    dataTask = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
+    dataTask = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error, NSData *data) {
         if (error) {
             if (failure) {
                 failure(dataTask, error);
             }
         } else {
             if (success) {
-                success(dataTask, responseObject);
+                success(dataTask, responseObject, data);
             }
         }
     }];

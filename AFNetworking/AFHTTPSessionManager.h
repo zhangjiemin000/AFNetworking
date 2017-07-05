@@ -147,7 +147,7 @@
  */
 - (NSURLSessionDataTask *)GET:(NSString *)URLString
                    parameters:(id)parameters
-                      success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                      success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSData *data))success
                       failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
 
 /**
@@ -177,7 +177,7 @@
  */
 - (NSURLSessionDataTask *)POST:(NSString *)URLString
                     parameters:(id)parameters
-                       success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                       success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSData *data))success
                        failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
 
 /**
@@ -194,7 +194,7 @@
 - (NSURLSessionDataTask *)POST:(NSString *)URLString
                     parameters:(id)parameters
      constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
-                       success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                       success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSData *data))success
                        failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
 
 /**
@@ -209,7 +209,7 @@
  */
 - (NSURLSessionDataTask *)PUT:(NSString *)URLString
                    parameters:(id)parameters
-                      success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                      success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSData *data))success
                       failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
 
 /**
@@ -224,7 +224,7 @@
  */
 - (NSURLSessionDataTask *)PATCH:(NSString *)URLString
                      parameters:(id)parameters
-                        success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                        success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSData *data))success
                         failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
 
 /**
@@ -239,7 +239,7 @@
  */
 - (NSURLSessionDataTask *)DELETE:(NSString *)URLString
                       parameters:(id)parameters
-                         success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                         success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSData *data))success
                          failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
 
 @end

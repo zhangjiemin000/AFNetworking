@@ -218,7 +218,7 @@
  @param completionHandler A block object to be executed when the task finishes. This block has no return value and takes three arguments: the server response, the response object created by that serializer, and the error that occurred, if any.
  */
 - (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request
-                            completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionHandler;
+                            completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error, NSData * _Nullable data))completionHandler;
 
 ///---------------------------
 /// @name Running Upload Tasks
@@ -237,7 +237,7 @@
 - (NSURLSessionUploadTask *)uploadTaskWithRequest:(NSURLRequest *)request
                                          fromFile:(NSURL *)fileURL
                                          progress:(NSProgress * __autoreleasing *)progress
-                                completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionHandler;
+                                completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error, NSData * _Nullable data))completionHandler;
 
 /**
  Creates an `NSURLSessionUploadTask` with the specified request for an HTTP body.
@@ -250,7 +250,7 @@
 - (NSURLSessionUploadTask *)uploadTaskWithRequest:(NSURLRequest *)request
                                          fromData:(NSData *)bodyData
                                          progress:(NSProgress * __autoreleasing *)progress
-                                completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionHandler;
+                                completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error, NSData * _Nullable data))completionHandler;
 
 /**
  Creates an `NSURLSessionUploadTask` with the specified streaming request.
@@ -261,7 +261,7 @@
  */
 - (NSURLSessionUploadTask *)uploadTaskWithStreamedRequest:(NSURLRequest *)request
                                                  progress:(NSProgress * __autoreleasing *)progress
-                                        completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionHandler;
+                                        completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error, NSData * _Nullable data))completionHandler;
 
 ///-----------------------------
 /// @name Running Download Tasks
@@ -280,7 +280,7 @@
 - (NSURLSessionDownloadTask *)downloadTaskWithRequest:(NSURLRequest *)request
                                              progress:(NSProgress * __autoreleasing *)progress
                                           destination:(NSURL * (^)(NSURL *targetPath, NSURLResponse *response))destination
-                                    completionHandler:(void (^)(NSURLResponse *response, NSURL *filePath, NSError *error))completionHandler;
+                                    completionHandler:(void (^)(NSURLResponse *response, NSURL *filePath, NSError *error, NSData * _Nullable data))completionHandler;
 
 /**
  Creates an `NSURLSessionDownloadTask` with the specified resume data.
@@ -293,7 +293,7 @@
 - (NSURLSessionDownloadTask *)downloadTaskWithResumeData:(NSData *)resumeData
                                                 progress:(NSProgress * __autoreleasing *)progress
                                              destination:(NSURL * (^)(NSURL *targetPath, NSURLResponse *response))destination
-                                       completionHandler:(void (^)(NSURLResponse *response, NSURL *filePath, NSError *error))completionHandler;
+                                       completionHandler:(void (^)(NSURLResponse *response, NSURL *filePath, NSError *error, NSData * _Nullable data))completionHandler;
 
 ///---------------------------------
 /// @name Getting Progress for Tasks
