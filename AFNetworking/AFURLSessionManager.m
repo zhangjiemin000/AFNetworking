@@ -108,11 +108,6 @@ typedef void (^AFURLSessionTaskProgressBlock)(NSProgress *);
 
 typedef void (^AFURLSessionTaskCompletionHandler)(NSURLResponse *response, id responseObject, NSError *error, NSData *data);
 
-<<<<<<< HEAD
-=======
-typedef void (^AFURLSessionTaskCompletionHandler)(NSURLResponse *response, id responseObject, NSError *error, NSData *data);
->>>>>>> origin/master
-
 #pragma mark -
 
 @interface AFURLSessionManagerTaskDelegate : NSObject <NSURLSessionTaskDelegate, NSURLSessionDataDelegate, NSURLSessionDownloadDelegate>
@@ -578,11 +573,8 @@ static NSString * const AFNSURLSessionTaskDidSuspendNotification = @"com.alamofi
 }
 
 - (void)addDelegateForDataTask:(NSURLSessionDataTask *)dataTask
-<<<<<<< HEAD
                 uploadProgress:(nullable void (^)(NSProgress *uploadProgress)) uploadProgressBlock
               downloadProgress:(nullable void (^)(NSProgress *downloadProgress)) downloadProgressBlock
-=======
->>>>>>> origin/master
              completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error, NSData * _Nullable data))completionHandler
 {
     AFURLSessionManagerTaskDelegate *delegate = [[AFURLSessionManagerTaskDelegate alloc] initWithTask:dataTask];
@@ -597,11 +589,7 @@ static NSString * const AFNSURLSessionTaskDidSuspendNotification = @"com.alamofi
 }
 
 - (void)addDelegateForUploadTask:(NSURLSessionUploadTask *)uploadTask
-<<<<<<< HEAD
                         progress:(void (^)(NSProgress *uploadProgress)) uploadProgressBlock
-=======
-                        progress:(NSProgress * __autoreleasing *)progress
->>>>>>> origin/master
                completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error, NSData *data))completionHandler
 {
     AFURLSessionManagerTaskDelegate *delegate = [[AFURLSessionManagerTaskDelegate alloc] initWithTask:uploadTask];
@@ -742,14 +730,8 @@ static NSString * const AFNSURLSessionTaskDidSuspendNotification = @"com.alamofi
 
 - (NSURLSessionUploadTask *)uploadTaskWithRequest:(NSURLRequest *)request
                                          fromFile:(NSURL *)fileURL
-<<<<<<< HEAD
                                          progress:(void (^)(NSProgress *uploadProgress)) uploadProgressBlock
                                 completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error, NSData * _Nullable data))completionHandler{
-=======
-                                         progress:(NSProgress * __autoreleasing *)progress
-                                completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error, NSData * _Nullable data))completionHandler
-{
->>>>>>> origin/master
     __block NSURLSessionUploadTask *uploadTask = nil;
     url_session_manager_create_task_safely(^{
         uploadTask = [self.session uploadTaskWithRequest:request fromFile:fileURL];
@@ -769,11 +751,7 @@ static NSString * const AFNSURLSessionTaskDidSuspendNotification = @"com.alamofi
 
 - (NSURLSessionUploadTask *)uploadTaskWithRequest:(NSURLRequest *)request
                                          fromData:(NSData *)bodyData
-<<<<<<< HEAD
                                          progress:(void (^)(NSProgress *uploadProgress)) uploadProgressBlock
-=======
-                                         progress:(NSProgress * __autoreleasing *)progress
->>>>>>> origin/master
                                 completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error, NSData * _Nullable data))completionHandler
 {
     __block NSURLSessionUploadTask *uploadTask = nil;
@@ -787,11 +765,7 @@ static NSString * const AFNSURLSessionTaskDidSuspendNotification = @"com.alamofi
 }
 
 - (NSURLSessionUploadTask *)uploadTaskWithStreamedRequest:(NSURLRequest *)request
-<<<<<<< HEAD
                                                  progress:(void (^)(NSProgress *uploadProgress)) uploadProgressBlock
-=======
-                                                 progress:(NSProgress * __autoreleasing *)progress
->>>>>>> origin/master
                                         completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error, NSData * _Nullable data))completionHandler
 {
     __block NSURLSessionUploadTask *uploadTask = nil;
