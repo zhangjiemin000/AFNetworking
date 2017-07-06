@@ -151,7 +151,11 @@
                        success:(void (^)(NSURLSessionDataTask *task))success
                        failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
+<<<<<<< HEAD
     NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:@"HEAD" URLString:URLString parameters:parameters uploadProgress:nil downloadProgress:nil success:^(NSURLSessionDataTask *task, __unused id responseObject, NSData *data) {
+=======
+    NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:@"HEAD" URLString:URLString parameters:parameters success:^(NSURLSessionDataTask *task, __unused id responseObject, NSData *data) {
+>>>>>>> origin/master
         if (success) {
             success(task);
         }
@@ -195,7 +199,10 @@
 - (NSURLSessionDataTask *)POST:(NSString *)URLString
                     parameters:(id)parameters
      constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
+<<<<<<< HEAD
                       progress:(nullable void (^)(NSProgress * _Nonnull))uploadProgress
+=======
+>>>>>>> origin/master
                        success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSData *data))success
                        failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
@@ -211,7 +218,11 @@
         return nil;
     }
 
+<<<<<<< HEAD
     __block NSURLSessionDataTask *task = [self uploadTaskWithStreamedRequest:request progress:uploadProgress completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error, NSData *data) {
+=======
+    __block NSURLSessionDataTask *task = [self uploadTaskWithStreamedRequest:request progress:nil completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error, NSData *data) {
+>>>>>>> origin/master
         if (error) {
             if (failure) {
                 failure(task, error);
@@ -267,8 +278,11 @@
 - (NSURLSessionDataTask *)dataTaskWithHTTPMethod:(NSString *)method
                                        URLString:(NSString *)URLString
                                       parameters:(id)parameters
+<<<<<<< HEAD
                                   uploadProgress:(nullable void (^)(NSProgress *uploadProgress)) uploadProgress
                                 downloadProgress:(nullable void (^)(NSProgress *downloadProgress)) downloadProgress
+=======
+>>>>>>> origin/master
                                          success:(void (^)(NSURLSessionDataTask *, id, NSData *))success
                                          failure:(void (^)(NSURLSessionDataTask *, NSError *))failure
 {
@@ -285,10 +299,14 @@
     }
 
     __block NSURLSessionDataTask *dataTask = nil;
+<<<<<<< HEAD
     dataTask = [self dataTaskWithRequest:request
                           uploadProgress:uploadProgress
                         downloadProgress:downloadProgress
                        completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error, NSData *data) {
+=======
+    dataTask = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error, NSData *data) {
+>>>>>>> origin/master
         if (error) {
             if (failure) {
                 failure(dataTask, error);

@@ -148,6 +148,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @see -dataTaskWithRequest:completionHandler:
  */
+<<<<<<< HEAD
 - (nullable NSURLSessionDataTask *)GET:(NSString *)URLString
                    parameters:(nullable id)parameters
                       success:(nullable void (^)(NSURLSessionDataTask *task, id _Nullable responseObject, NSData *data))success
@@ -170,6 +171,12 @@ NS_ASSUME_NONNULL_BEGIN
                               progress:(nullable void (^)(NSProgress *downloadProgress))downloadProgress
                                success:(nullable void (^)(NSURLSessionDataTask *task, id _Nullable responseObject, NSData *data))success
                                failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError *error))failure;
+=======
+- (NSURLSessionDataTask *)GET:(NSString *)URLString
+                   parameters:(id)parameters
+                      success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSData *data))success
+                      failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
+>>>>>>> origin/master
 
 /**
  Creates and runs an `NSURLSessionDataTask` with a `HEAD` request.
@@ -196,6 +203,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @see -dataTaskWithRequest:completionHandler:
  */
+<<<<<<< HEAD
 - (nullable NSURLSessionDataTask *)POST:(NSString *)URLString
                     parameters:(nullable id)parameters
                        success:(nullable void (^)(NSURLSessionDataTask *task, id _Nullable responseObject, NSData *data))success
@@ -217,6 +225,12 @@ NS_ASSUME_NONNULL_BEGIN
                                progress:(nullable void (^)(NSProgress *uploadProgress))uploadProgress
                                 success:(nullable void (^)(NSURLSessionDataTask *task, id _Nullable responseObject, NSData *data))success
                                 failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError *error))failure;
+=======
+- (NSURLSessionDataTask *)POST:(NSString *)URLString
+                    parameters:(id)parameters
+                       success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSData *data))success
+                       failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
+>>>>>>> origin/master
 
 /**
  Creates and runs an `NSURLSessionDataTask` with a multipart `POST` request.
@@ -229,6 +243,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @see -dataTaskWithRequest:completionHandler:
  */
+<<<<<<< HEAD
 - (nullable NSURLSessionDataTask *)POST:(NSString *)URLString
                     parameters:(nullable id)parameters
      constructingBodyWithBlock:(nullable void (^)(id <AFMultipartFormData> formData))block
@@ -244,6 +259,13 @@ NS_ASSUME_NONNULL_BEGIN
  @param uploadProgress A block object to be executed when the upload progress is updated. Note this block is called on the session queue, not the main queue.
  @param success A block object to be executed when the task finishes successfully. This block has no return value and takes two arguments: the data task, and the response object created by the client response serializer.
  @param failure A block object to be executed when the task finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the response data. This block has no return value and takes a two arguments: the data task and the error describing the network or parsing error that occurred.
+=======
+- (NSURLSessionDataTask *)POST:(NSString *)URLString
+                    parameters:(id)parameters
+     constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
+                       success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSData *data))success
+                       failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
+>>>>>>> origin/master
 
  @see -dataTaskWithRequest:uploadProgress:downloadProgress:completionHandler:
  */
@@ -263,10 +285,17 @@ NS_ASSUME_NONNULL_BEGIN
 
  @see -dataTaskWithRequest:completionHandler:
  */
+<<<<<<< HEAD
 - (nullable NSURLSessionDataTask *)PUT:(NSString *)URLString
                    parameters:(nullable id)parameters
                       success:(nullable void (^)(NSURLSessionDataTask *task, id _Nullable responseObject, NSData *data))success
                       failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError *error))failure;
+=======
+- (NSURLSessionDataTask *)PUT:(NSString *)URLString
+                   parameters:(id)parameters
+                      success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSData *data))success
+                      failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
+>>>>>>> origin/master
 
 /**
  Creates and runs an `NSURLSessionDataTask` with a `PATCH` request.
@@ -278,10 +307,17 @@ NS_ASSUME_NONNULL_BEGIN
 
  @see -dataTaskWithRequest:completionHandler:
  */
+<<<<<<< HEAD
 - (nullable NSURLSessionDataTask *)PATCH:(NSString *)URLString
                      parameters:(nullable id)parameters
                         success:(nullable void (^)(NSURLSessionDataTask *task, id _Nullable responseObject, NSData *data))success
                         failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError *error))failure;
+=======
+- (NSURLSessionDataTask *)PATCH:(NSString *)URLString
+                     parameters:(id)parameters
+                        success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSData *data))success
+                        failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
+>>>>>>> origin/master
 
 /**
  Creates and runs an `NSURLSessionDataTask` with a `DELETE` request.
@@ -293,10 +329,17 @@ NS_ASSUME_NONNULL_BEGIN
 
  @see -dataTaskWithRequest:completionHandler:
  */
+<<<<<<< HEAD
 - (nullable NSURLSessionDataTask *)DELETE:(NSString *)URLString
                       parameters:(nullable id)parameters
                          success:(nullable void (^)(NSURLSessionDataTask *task, id _Nullable responseObject, NSData *data))success
                          failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError *error))failure;
+=======
+- (NSURLSessionDataTask *)DELETE:(NSString *)URLString
+                      parameters:(id)parameters
+                         success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSData *data))success
+                         failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
+>>>>>>> origin/master
 
 @end
 

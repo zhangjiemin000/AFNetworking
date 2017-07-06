@@ -208,6 +208,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param completionHandler A block object to be executed when the task finishes. This block has no return value and takes three arguments: the server response, the response object created by that serializer, and the error that occurred, if any.
  */
 - (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request
+<<<<<<< HEAD
                             completionHandler:(nullable void (^)(NSURLResponse *response, id _Nullable responseObject,  NSError * _Nullable error,NSData * _Nullable data))completionHandler DEPRECATED_ATTRIBUTE;
 
 /**
@@ -222,6 +223,9 @@ NS_ASSUME_NONNULL_BEGIN
                                uploadProgress:(nullable void (^)(NSProgress *uploadProgress))uploadProgressBlock
                              downloadProgress:(nullable void (^)(NSProgress *downloadProgress))downloadProgressBlock
                             completionHandler:(nullable void (^)(NSURLResponse *response, id _Nullable responseObject,  NSError * _Nullable error, NSData * _Nullable data))completionHandler;
+=======
+                            completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error, NSData * _Nullable data))completionHandler;
+>>>>>>> origin/master
 
 ///---------------------------
 /// @name Running Upload Tasks
@@ -239,9 +243,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSURLSessionUploadTask *)uploadTaskWithRequest:(NSURLRequest *)request
                                          fromFile:(NSURL *)fileURL
+<<<<<<< HEAD
                                          progress:(nullable void (^)(NSProgress *uploadProgress))uploadProgressBlock
                                 completionHandler:(nullable void (^)(NSURLResponse *response, id _Nullable responseObject, NSError  * _Nullable error, NSData * _Nullable data))completionHandler;
 
+=======
+                                         progress:(NSProgress * __autoreleasing *)progress
+                                completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error, NSData * _Nullable data))completionHandler;
+>>>>>>> origin/master
 
 /**
  Creates an `NSURLSessionUploadTask` with the specified request for an HTTP body.
@@ -252,10 +261,16 @@ NS_ASSUME_NONNULL_BEGIN
  @param completionHandler A block object to be executed when the task finishes. This block has no return value and takes three arguments: the server response, the response object created by that serializer, and the error that occurred, if any.
  */
 - (NSURLSessionUploadTask *)uploadTaskWithRequest:(NSURLRequest *)request
+<<<<<<< HEAD
                                          fromData:(nullable NSData *)bodyData
                                          progress:(nullable void (^)(NSProgress *uploadProgress))uploadProgressBlock
                                 completionHandler:(nullable void (^)(NSURLResponse *response, id _Nullable responseObject, NSError * _Nullable error, NSData * _Nullable data))completionHandler;
 
+=======
+                                         fromData:(NSData *)bodyData
+                                         progress:(NSProgress * __autoreleasing *)progress
+                                completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error, NSData * _Nullable data))completionHandler;
+>>>>>>> origin/master
 
 /**
  Creates an `NSURLSessionUploadTask` with the specified streaming request.
@@ -265,8 +280,13 @@ NS_ASSUME_NONNULL_BEGIN
  @param completionHandler A block object to be executed when the task finishes. This block has no return value and takes three arguments: the server response, the response object created by that serializer, and the error that occurred, if any.
  */
 - (NSURLSessionUploadTask *)uploadTaskWithStreamedRequest:(NSURLRequest *)request
+<<<<<<< HEAD
                                                  progress:(nullable void (^)(NSProgress *uploadProgress))uploadProgressBlock
                                         completionHandler:(nullable void (^)(NSURLResponse *response, id _Nullable responseObject, NSError * _Nullable error, NSData * _Nullable data))completionHandler;
+=======
+                                                 progress:(NSProgress * __autoreleasing *)progress
+                                        completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error, NSData * _Nullable data))completionHandler;
+>>>>>>> origin/master
 
 ///-----------------------------
 /// @name Running Download Tasks
@@ -283,9 +303,15 @@ NS_ASSUME_NONNULL_BEGIN
  @warning If using a background `NSURLSessionConfiguration` on iOS, these blocks will be lost when the app is terminated. Background sessions may prefer to use `-setDownloadTaskDidFinishDownloadingBlock:` to specify the URL for saving the downloaded file, rather than the destination block of this method.
  */
 - (NSURLSessionDownloadTask *)downloadTaskWithRequest:(NSURLRequest *)request
+<<<<<<< HEAD
                                              progress:(nullable void (^)(NSProgress *downloadProgress))downloadProgressBlock
                                           destination:(nullable NSURL * (^)(NSURL *targetPath, NSURLResponse *response))destination
                                     completionHandler:(nullable void (^)(NSURLResponse *response, NSURL * _Nullable filePath, NSError * _Nullable error, NSData * _Nullable data))completionHandler;
+=======
+                                             progress:(NSProgress * __autoreleasing *)progress
+                                          destination:(NSURL * (^)(NSURL *targetPath, NSURLResponse *response))destination
+                                    completionHandler:(void (^)(NSURLResponse *response, NSURL *filePath, NSError *error, NSData * _Nullable data))completionHandler;
+>>>>>>> origin/master
 
 /**
  Creates an `NSURLSessionDownloadTask` with the specified resume data.
@@ -296,9 +322,15 @@ NS_ASSUME_NONNULL_BEGIN
  @param completionHandler A block to be executed when a task finishes. This block has no return value and takes three arguments: the server response, the path of the downloaded file, and the error describing the network or parsing error that occurred, if any.
  */
 - (NSURLSessionDownloadTask *)downloadTaskWithResumeData:(NSData *)resumeData
+<<<<<<< HEAD
                                                 progress:(nullable void (^)(NSProgress *downloadProgress))downloadProgressBlock
                                              destination:(nullable NSURL * (^)(NSURL *targetPath, NSURLResponse *response))destination
                                        completionHandler:(nullable void (^)(NSURLResponse *response, NSURL * _Nullable filePath, NSError * _Nullable error, NSData * _Nullable data))completionHandler;
+=======
+                                                progress:(NSProgress * __autoreleasing *)progress
+                                             destination:(NSURL * (^)(NSURL *targetPath, NSURLResponse *response))destination
+                                       completionHandler:(void (^)(NSURLResponse *response, NSURL *filePath, NSError *error, NSData * _Nullable data))completionHandler;
+>>>>>>> origin/master
 
 ///---------------------------------
 /// @name Getting Progress for Tasks
