@@ -295,7 +295,14 @@
             }
         } else {
             if (success) {
-                success(dataTask, responseObject, data);
+                NSMutableDictionary *dict = @{}.mutableCopy;
+                if (response) {
+                    [dict setValue:response forKey:@"response"];
+                }
+                if (responseObject) {
+                    [dict setValue:responseObject forKey:@"responseObject"];
+                }
+                success(dataTask, dict, data);
             }
         }
     }];
