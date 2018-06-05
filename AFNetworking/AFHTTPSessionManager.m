@@ -295,14 +295,14 @@
             }
         } else {
             if (success) {
-                NSMutableDictionary *dict = @{}.mutableCopy;
-                if (response) {
-                    [dict setValue:response forKey:@"response"];
+                if ([responseObject isKindOfClass:[NSDictionary class]]) {
+                    NSMutableDictionary *tempResponseObject = [NSMutableDictionary dictionaryWithDictionary:responseObject];
+                    if (response) {
+                        [tempResponseObject setObject:response forKey:@"gomo_response"];
+                    }
+                    responseObject = tempResponseObject;
                 }
-                if (responseObject) {
-                    [dict setValue:responseObject forKey:@"responseObject"];
-                }
-                success(dataTask, dict, data);
+                success(dataTask, responseObject, data);
             }
         }
     }];
